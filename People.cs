@@ -21,7 +21,7 @@ namespace Employees
                 input = Console.ReadLine();
                 if (Int32.TryParse(input, out age) == false)
                 {
-                    Console.WriteLine("ОШИБКА!!! Возраст должен состоять только из цифр\nНажмите Enter и попробуйте ещё раз . . .");
+                    Console.WriteLine("\nОШИБКА!!! Возраст должен состоять только из цифр\nНажмите Enter и попробуйте ещё раз . . .");
                     do
                     {
                         //Nothing
@@ -33,7 +33,7 @@ namespace Employees
                 {
                     if (age < 16 || age > 50)
                     {
-                        Console.WriteLine("ОШИБКА!!! Возраст должен быть от 16 до 50 лет\nНажмите Enter и попробуйте ещё раз . . .");
+                        Console.WriteLine("\nОШИБКА!!! Возраст должен быть от 16 до 50 лет\nНажмите Enter и попробуйте ещё раз . . .");
                         do
                         {
                             //Nothing

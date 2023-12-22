@@ -6,19 +6,28 @@ using System.Threading.Tasks;
 
 namespace Employees
 {
-    internal class Eployee : People
+    internal class Employee : People
     {
         protected int section;
+        protected int planDay = 15;
+        protected int planNight = 5;
         protected int workDay = 0;
         protected int workNight = 0;
+        protected int overDay = 0;
+        protected int overNight = 0;
         protected double salary;
+        protected Random random = new Random();
+        public void Start()
+        {
+            InfoIn();
+        }
         protected override void InfoIn()
         {
             base.InfoIn();
             string input;
             do
             {
-                Console.WriteLine("Введите отдел (1 или 2): ");
+                Console.Write("Введите отдел (1 или 2): ");
                 input = Console.ReadLine();
                 if (input == "1")
                 {
@@ -30,7 +39,7 @@ namespace Employees
                 }
                 else
                 {
-                    Console.WriteLine("ОШИБКА!!! Такого отдела не существует\nНажмите Enter и попробуйте ещё раз . . .");
+                    Console.WriteLine("\nОШИБКА!!! Такого отдела не существует\nНажмите Enter и попробуйте ещё раз . . .");
                     do
                     {
                         //Nothing
@@ -43,14 +52,41 @@ namespace Employees
         }
         protected void Work()
         {
-            Random random = new Random();
             workDay = random.Next(1, 31);
             if (age >= 18)
             {
                 workNight = 30 - workDay;
             }
             salary = workDay * 2000 + workNight * 3500;    /*2000 - зарплата за одну дневную смену, 3500 - за одну ночную*/
-
+        }
+        protected void OverWork()
+        {
+            if (workDay > planDay)
+            {
+                overDay = workDay - planDay;
+            }
+            if (workNight > planNight)
+            {
+                overNight = workNight - planNight;
+            }
+        }
+        protected void InfoOut()
+        {
+            Console.WriteLine($"Имя: {name}");
+            Console.WriteLine($"Возраст: {age}");
+            Console.WriteLine($"Отдел: {section}");
+            Console.WriteLine($"Дневные смены: {workDay}/{planDay}");
+            if (age >= 18)
+            {
+                Console.WriteLine($"Ночные смены: {workNight}/{planNight}");
+            }
+            Console.WriteLine($"Общая зарплата: {salary}");
+        }
+        public void InfoOutPublic()
+        {
+            Work();
+            OverWork();
+            InfoOut();
         }
     }
 }
